@@ -16,6 +16,7 @@ public class Student implements Serializable {
 
 	   
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	private String firstName;
 	private String lastName;
@@ -25,11 +26,40 @@ public class Student implements Serializable {
 	private String degree;
 	private String address;
 	private String mobile;
+	
+	@ManyToOne(cascade=CascadeType.PERSIST)
+	private Semester semester;
+	
+	@OneToOne(mappedBy="student",cascade=CascadeType.PERSIST)
+	private Gpa gpa;
+	
+	@ManyToOne(cascade=CascadeType.PERSIST)
+	private Status status;
+	
+	@ManyToOne(cascade=CascadeType.PERSIST)
+	private Level level;
+	
 	private static final long serialVersionUID = 1L;
 
 	public Student() {
 		super();
 	}   
+	
+	
+	public Student(String firstName, String lastName, String middleName, String gender, LocalDate birthDate,
+			String degree, String address, String mobile) {
+		super();
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.middleName = middleName;
+		this.gender = gender;
+		this.birthDate = birthDate;
+		this.degree = degree;
+		this.address = address;
+		this.mobile = mobile;
+	}
+
+
 	public Integer getId() {
 		return this.id;
 	}
@@ -93,5 +123,44 @@ public class Student implements Serializable {
 	public void setMobile(String mobile) {
 		this.mobile = mobile;
 	}
+
+	public Semester getSemester() {
+		return semester;
+	}
+
+	public void setSemester(Semester semester) {
+		this.semester = semester;
+	}
+
+
+	public Gpa getGpa() {
+		return gpa;
+	}
+
+
+	public void setGpa(Gpa gpa) {
+		this.gpa = gpa;
+	}
+
+
+	public Status getStatus() {
+		return status;
+	}
+
+
+	public void setStatus(Status status) {
+		this.status = status;
+	}
+
+
+	public Level getLevel() {
+		return level;
+	}
+
+
+	public void setLevel(Level level) {
+		this.level = level;
+	}
+	
    
 }
